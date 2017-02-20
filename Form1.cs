@@ -31,10 +31,26 @@ namespace ComDelegateTest
         [DllImport("ComDelegate.dll")]
         public static extern int uninitDelegate();
 
+        delegate void SetTextCallBack(string text);
+        private void SetText(string text)
+        {
+            if (this.log_text.InvokeRequired)
+            {
+                SetTextCallBack stcb = new SetTextCallBack(SetText);
+                this.Invoke(stcb, new object[] { text });
+            }
+            else
+            {
+                this.log_text.AppendText(text);
+            }
+        }
+
         //声明回调的函数
         public void ComRecvCallImp(String buf, int size)
         {
-            MessageBox.Show(buf);
+            //MessageBox.Show(buf);
+            //log_text.AppendText(buf+"\r\n");
+            SetText(buf+"\r\n");
             return;
         }
 

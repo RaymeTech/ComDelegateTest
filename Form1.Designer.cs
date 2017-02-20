@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.run_btn = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.log_text = new System.Windows.Forms.TextBox();
             this.com_in_text = new System.Windows.Forms.TextBox();
             this.com_out_text = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,13 +46,13 @@
             this.run_btn.UseVisualStyleBackColor = true;
             this.run_btn.Click += new System.EventHandler(this.run_btn_Click);
             // 
-            // textBox1
+            // log_text
             // 
-            this.textBox1.Location = new System.Drawing.Point(27, 71);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(478, 358);
-            this.textBox1.TabIndex = 2;
+            this.log_text.Location = new System.Drawing.Point(27, 71);
+            this.log_text.Multiline = true;
+            this.log_text.Name = "log_text";
+            this.log_text.Size = new System.Drawing.Size(478, 358);
+            this.log_text.TabIndex = 2;
             // 
             // com_in_text
             // 
@@ -95,7 +95,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.com_out_text);
             this.Controls.Add(this.com_in_text);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.log_text);
             this.Controls.Add(this.run_btn);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -107,7 +107,7 @@
         #endregion
 
         private System.Windows.Forms.Button run_btn;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox log_text;
         private System.Windows.Forms.TextBox com_in_text;
         private System.Windows.Forms.TextBox com_out_text;
         private System.Windows.Forms.Label label1;
