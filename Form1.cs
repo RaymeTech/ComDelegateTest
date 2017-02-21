@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace ComDelegateTest
 {
+
     public partial class Form1 : Form
     {
         //声明
@@ -30,6 +31,45 @@ namespace ComDelegateTest
         public static extern int initDelegate();
         [DllImport("ComDelegate.dll")]
         public static extern int uninitDelegate();
+
+        // 模拟键盘输入 //
+        [DllImport("user32.dll")]
+        static extern void keybd_event(byte bVk, byte bScan, uint dwFlags,
+           int dwExtraInfo);
+
+        // 键盘键值定义 //
+        const byte key_1_value = 0x31;
+        const byte key_2_value = 0x32;
+        const byte key_3_value = 0x33;
+        const byte key_4_value = 0x34;
+        const byte key_5_value = 0x35;
+        const byte key_6_value = 0x36;
+        const byte key_7_value = 0x37;
+        const byte key_8_value = 0x38;
+        const byte key_9_value = 0x39;
+        const byte key_0_value = 0x30;
+
+        const byte key_1_scan = 0x02;
+        const byte key_2_scan = 0x03;
+        const byte key_3_scan = 0x04;
+        const byte key_4_scan = 0x05;
+        const byte key_5_scan = 0x06;
+        const byte key_6_scan = 0x07;
+        const byte key_7_scan = 0x08;
+        const byte key_8_scan = 0x09;
+        const byte key_9_scan = 0x0a;
+        const byte key_0_scan = 0x0b;
+
+        const byte key_enter_value = 0x0d;
+        const byte key_enter_scan = 0x1c;
+        const byte key_point_value = 0x6e;
+        const byte key_point_scan = 0x31;
+
+        private void ClickKey(byte value, byte scan)
+        {
+            keybd_event(value, scan, 0, 0);
+            keybd_event(value, scan, 2, 0);
+        }
 
         delegate void SetTextCallBack(string text);
         private void SetText(string text)
@@ -63,6 +103,23 @@ namespace ComDelegateTest
 
         private void run_btn_Click(object sender, EventArgs e)
         {
+            log_text.Focus();
+            ClickKey(key_1_value, key_1_scan);
+            ClickKey(key_3_value, key_3_scan);
+            ClickKey(key_5_value, key_5_scan);
+            ClickKey(key_8_value, key_8_scan);
+            ClickKey(key_8_value, key_8_scan);
+            ClickKey(key_4_value, key_4_scan);
+            ClickKey(key_9_value, key_9_scan);
+            ClickKey(key_4_value, key_4_scan);
+            ClickKey(key_7_value, key_7_scan);
+            ClickKey(key_8_value, key_8_scan);
+            ClickKey(key_3_value, key_3_scan);
+            ClickKey(key_enter_value, key_enter_scan);
+            ClickKey(key_point_value, key_point_scan);
+            ClickKey(key_0_value, key_0_scan);
+            ClickKey(key_0_value, key_0_scan);
+            return;
             if (run_btn.Text == "启动")
             {
                 String com_port = com_in_text.Text;
