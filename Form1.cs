@@ -31,6 +31,8 @@ namespace ComDelegateTest
         public static extern int initDelegate();
         [DllImport("ComDelegate.dll")]
         public static extern int uninitDelegate();
+        [DllImport("ComDelegate.dll")]
+        public static extern int setLogPath(String path);
 
         // 模拟键盘输入 //
         [DllImport("user32.dll")]
@@ -103,41 +105,40 @@ namespace ComDelegateTest
 
         private void run_btn_Click(object sender, EventArgs e)
         {
-            log_text.Focus();
-            ClickKey(key_1_value, key_1_scan);
-            ClickKey(key_3_value, key_3_scan);
-            ClickKey(key_5_value, key_5_scan);
-            ClickKey(key_8_value, key_8_scan);
-            ClickKey(key_8_value, key_8_scan);
-            ClickKey(key_4_value, key_4_scan);
-            ClickKey(key_9_value, key_9_scan);
-            ClickKey(key_4_value, key_4_scan);
-            ClickKey(key_7_value, key_7_scan);
-            ClickKey(key_8_value, key_8_scan);
-            ClickKey(key_3_value, key_3_scan);
-            ClickKey(key_enter_value, key_enter_scan);
-            ClickKey(key_point_value, key_point_scan);
-            ClickKey(key_0_value, key_0_scan);
-            ClickKey(key_0_value, key_0_scan);
-            return;
             if (run_btn.Text == "启动")
             {
                 String com_port = com_in_text.Text;
-                com_port = com_port + "&9600&N&8&1";
+                String baud = baud_text.Text;
+                String data = data_text.Text;
+                String stop = stop_text.Text;
+                String parity = parity_text.Text;
+                com_port = com_port + "&" + baud + "&" + parity + "&" + data + "&" + stop;
                 setComIn(com_port);
 
                 com_port = com_out_text.Text;
-                com_port = com_port + "&9600&N&8&1";
+                com_port = com_port + "&" + baud + "&" + parity + "&" + data + "&" + stop;
                 setComOut(com_port);
 
                 initDelegate();
-
                 run_btn.Text = "停止";
             }
             else
             {
                 run_btn.Text = "启动";
                 uninitDelegate();
+            }
+        }
+
+        private void log_btn_Click(object sender, EventArgs e)
+        {
+            if (log_btn.Text == "开启日志")
+            {
+                String path = System.Environment.CurrentDirectory+"\\";
+                setLogPath(path);
+                log_btn.Text = "关闭日志";
+            } else {
+                setLogPath("");
+                log_btn.Text = "开启日志";
             }
         }
     }
